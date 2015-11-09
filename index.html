@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8" content="text/html" />
+		<title> Morpion &copy; Maxwell ADANZOUNNON </title>
+		
+		<script>
+			var message;
+			var joueur = 1;
+			var fin;
+			
+			
+			function change(identifiant)
+			{	
+				lignejoue = identifiant.charAt(5);
+				coljoue = identifiant.charAt(7);
+				
+				
+				// si joueur == 1 et que l'id lignejoue et coljoue de l'image est different de joueur 2 on permet à joueur 1 de joueur   
+				if (joueur == 1 && morpion [lignejoue][coljoue] != 2 ){	
+					morpion[lignejoue][coljoue]=1; // debugg 
+					window.document.getElementById(identifiant).src="cercle48px.png";// on affiche le cercle qui represente le joueur 1
+					joueur =2; // c'est au tour du joueur 2
+					affichage(); // on appele la fonction qui affiche les messages débuf 
+					
+					// quand le joueur 1 gagne sur les lignes 1, 2 et 3 
+					if ((morpion[1][1]==1 && morpion[1][2]==1 && morpion[1][3]==1 ) ||(morpion[2][1]==1 && morpion[2][2]==1 && morpion[2][3]==1 ) ||(morpion[3][1]==1 && morpion[3][2]==1 && morpion[3][3]==1 )){
+						alert(" LE JOUEUR 1 A GAGNE ! FIN DE LA PARTIE");// on affiche une boite de dialogue joueur 1
+						window.location.reload(); //  et on termine la partie en recharge cette page 
+					} // sur les colonnes 1,2,3 
+					else if ((morpion[1][1]==1 && morpion[2][1]==1 && morpion[3][1]==1 ) ||(morpion[1][2]==1 && morpion[2][2]==1 && morpion[3][2]==1 ) ||(morpion[1][3]==1 && morpion[2][3]==1 && morpion[3][3]==1 )){
+						alert(" LE JOUEUR 1 A GAGNE ! FIN DE LA PARTIE");// on affiche une boite de dialogue joueur 1
+						window.location.reload(); //  et on termine la partie en recharge cette page. 
+					}// sur les diagonales
+					else if ((morpion[1][1]==1 && morpion[2][2]==1 && morpion[3][3]==1 ) ||(morpion[1][3]==1 && morpion[2][2]==1 && morpion[3][1]==1 )){
+						alert(" LE JOUEUR 1 A GAGNE ! FIN DE LA PARTIE");// on affiche une boite de dialogue joueur 1
+						window.location.reload(); //  et on termine la partie en recharge cette page. 
+					}
+					
+					
+				} // si joueur == 2 et que l'id lignejoue et coljoue de l'image est different de joueur 1 on permet à joueur 2 de joueur 
+				else if (joueur == 2 && morpion [lignejoue][coljoue] != 1)
+				{	
+					morpion[lignejoue][coljoue]=2;
+					window.document.getElementById(identifiant).src="croix48px.png";
+					joueur =1;
+					affichage();
+					
+					// quand le joueur 2 gagne sur les lignes 1, 2 et 3 
+					if ((morpion[1][1]==2 && morpion[1][2]==2 && morpion[1][3]==2 ) ||(morpion[2][1]==2 && morpion[2][2]==2 && morpion[2][3]==1 ) ||(morpion[3][1]==2 && morpion[3][2]==2 && morpion[3][3]==2 )){
+						alert(" LE JOUEUR 2 A GAGNE ! FIN DE LA PARTIE");// on affiche une boite de dialogue joueur 1
+						window.location.reload(); //  et on termine la partie en recharge cette page 
+					} // sur les colonnes 1,2,3
+					else if ((morpion[1][1]==2 && morpion[2][1]==2 && morpion[3][1]==2 ) ||(morpion[1][2]==2 && morpion[2][2]==2 && morpion[3][2]==2 ) ||(morpion[1][3]==2 && morpion[2][3]==2 && morpion[3][3]==2 )){
+						alert(" LE JOUEUR 2 A GAGNE ! FIN DE LA PARTIE");// on affiche une boite de dialogue joueur 1
+						window.location.reload(); //  et on termine la partie en recharge cette page. 
+					} // et diagonales
+					else if ((morpion[1][1]==2 && morpion[2][2]==2 && morpion[3][3]==2 ) ||(morpion[1][3]==2 && morpion[2][2]==2 && morpion[3][1]==2 )){
+						alert(" LE JOUEUR 2 A GAGNE ! FIN DE LA PARTIE");// on affiche une boite de dialogue joueur 1
+						window.location.reload(); //  et on termine la partie en recharge cette page. 
+					}
+					
+				}
+					
+			}
+			
+			
+		</script>
+		
+		<style>
+		#div{
+			background:#ccc;
+			width:200px;
+			height:200px;
+			border:1px;}
+		</style>
+	</head>
+	
+	<body>
+		
+		<h1 align="center">Super Morpion </h1>
+		<div align="center">
+		<script>
+		
+			for (ligne = 1; ligne <= 3; ligne++)
+			{	
+				for (col =1; col<=3; col++)
+				{
+					document.write("<img src='inter.png' border='1px' width='60px' height='60px' id = \"image"+ligne+"-"+col+"\" onclick=\" change(id)\" />");
+				}
+				document.write("<br />");
+			}
+			
+			
+			/*for (i=1; i<= 9; i++)
+			{
+				document.write("<img src='inter.png' border='1px' width='60px' height='60px' id = \"image"+i+"\" onclick=\" change(id)\" />");
+				
+				if ((i%3)==0) document.write("<br />");
+			}*/
+			
+			/**********initialisation tableau a double dim**************/
+			document.write("<br><br><br><br><br>")
+			morpion = new Array(4);
+			morpion[1] = new Array(4);
+			morpion[2] = new Array(4);
+			morpion[3] = new Array(4);
+			
+			for (ligne = 1; ligne <= 3; ligne++)
+			{	
+				for (col =1; col<=3; col++)
+				{
+					//morpion[ligne][col] ="ligne :"+ligne+" colonne : "+col;
+					morpion[ligne][col] =0;
+				}
+				
+			}
+			
+			affichage();
+			
+			function affichage(){
+			
+			message="";
+			
+				for (ligne = 1; ligne <= 3; ligne++)
+				{
+					for (col =1; col<=3; col++)
+					{
+						message+=morpion[ligne][col]+"|";
+					}
+					
+					message +="<br> |-----------------------------------| <br>";
+					
+					
+				}
+				
+				document.getElementById("div").innerHTML = message;
+			}
+			
+
+
+		</script>
+		
+		<div id= "div"> affichage du message</div>
+		</div>
+	</body>
+</html>
